@@ -166,7 +166,7 @@ GOOS=windows GOARCH=amd64 CGO_ENABLED=0 \
 > 토글(schtasks `TeaveloperRunner` 로그온 트리거, 관리자 불필요)로 구현돼 있습니다.
 
 ### 로컬 테스트 (리눅스/macOS, 콘솔 모드)
-참조 게이트웨이(`github.com/aramorugeta/teacher-app-portal` 의 `gateway/`)를 띄우고,
+참조 게이트웨이(포털의 `gateway/` — 비공개, 내부 협력자에게 문의)를 띄우고,
 `config.json`+`app/` 이 있는 폴더에서 러너를 실행한 뒤 `Host: <slug>` 로 왕복 확인.
 
 검증 완료: 정적 서빙 / submissions(공개 POST 201, 공개 GET·DELETE 403) /
@@ -189,7 +189,7 @@ rsrc -ico assets/icon.ico -arch amd64 -o rsrc_windows_amd64.syso
 ```
 
 ### 연관 프로젝트
-- **게이트웨이/포털**: `github.com/aramorugeta/teacher-app-portal` (무저장 중계 + 토큰 발급).
+- **게이트웨이/포털**: [teaveloper.com](https://teaveloper.com) (무저장 중계 + 토큰 발급 — 소스는 비공개).
 - **포털 연동 규격**: [PORTAL_INTEGRATION.md](PORTAL_INTEGRATION.md) — 포털이 제공해야 할
   것(config.json·빌드·활성화 UX·AI 앱 생성 규격)을 계약으로 정리.
 
