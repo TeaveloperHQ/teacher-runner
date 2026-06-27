@@ -36,3 +36,19 @@ jobs:
           GOARCH: amd64
           CGO_ENABLED: "0"
         run: go build -trimpath -ldflags "-H windowsgui -s -w" -o /tmp/teaveloper-runner.exe .
+
+  installer:
+    # 설치 프로그램(NSIS) 이 리눅스에서 컴파일되는지만 검증(업로드·게시 안 함).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26"
+          cache: true
+      - name: Install NSIS
+        run: sudo apt-get update && sudo apt-get install -y nsis
+      - name: Build exe
+        run: ./build.sh dist/teaveloper-runner.exe
+      - name: Compile installer (check only)
+        run: makensis installer/installer.nsi
