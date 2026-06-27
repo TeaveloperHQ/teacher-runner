@@ -1,4 +1,4 @@
-// teacher-runner — 교사 PC 러너.
+// teaveloper-runner — 교사 PC 러너.
 //
 // 한 exe 안에서: ① ./app/ 정적 프론트 서빙 ② 내장 데이터 API(/api, 프리셋 권한)
 // ③ 소유자 관리 페이지(/_admin, 로컬 전용) ④ 게이트웨이 터널 클라이언트.
@@ -19,10 +19,10 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/TeaveloperHQ/teacher-runner/internal/config"
-	"github.com/TeaveloperHQ/teacher-runner/internal/server"
-	"github.com/TeaveloperHQ/teacher-runner/internal/store"
-	"github.com/TeaveloperHQ/teacher-runner/internal/ui"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/config"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/server"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/store"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/ui"
 )
 
 func main() {

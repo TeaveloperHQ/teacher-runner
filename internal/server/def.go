@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/TeaveloperHQ/teacher-runner/internal/appdef"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/appdef"
 )
 
 func (s *Server) defPath() string {

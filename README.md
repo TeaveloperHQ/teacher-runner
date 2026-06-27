@@ -3,14 +3,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/TeaveloperHQ/teacher-runner/actions/workflows/build.yml"><img src="https://github.com/TeaveloperHQ/teacher-runner/actions/workflows/build.yml/badge.svg" alt="ci"></a>
+  <a href="https://github.com/TeaveloperHQ/teaveloper-runner/actions/workflows/build.yml"><img src="https://github.com/TeaveloperHQ/teaveloper-runner/actions/workflows/build.yml/badge.svg" alt="ci"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="license: MIT"></a>
   <img src="https://img.shields.io/badge/platform-Windows-0078D6" alt="platform">
 </p>
 
 <p align="center"><sub>배포용 exe 는 <b>teaveloper 포털에서 빌드</b>합니다(앱 이름 통일성). 이 레포는 소스이며 GitHub 릴리스로 exe 를 배포하지 않습니다.</sub></p>
 
-# Teaveloper 러너 (teacher-runner)
+# Teaveloper 러너 (teaveloper-runner)
 
 내 컴퓨터를 **공짜 서버**로 만들어, AI가 만들어 준 앱(설문·기록·신청 등)을 외부
 인터넷에서 접속할 수 있게 해주는 작은 프로그램입니다.

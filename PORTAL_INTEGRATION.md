@@ -1,6 +1,6 @@
-# 포털 연동 인수인계 (teacher-runner → teaveloper-portal)
+# 포털 연동 인수인계 (teaveloper-runner → teaveloper-portal)
 
-> **이 문서의 용도**: 러너(`github.com/TeaveloperHQ/teacher-runner`)가 동작하려면
+> **이 문서의 용도**: 러너(`github.com/TeaveloperHQ/teaveloper-runner`)가 동작하려면
 > 포털(`teaveloper.com` / `aramorugeta/teacher-app-portal`)이 무엇을 제공해야 하는지
 > 코드 기준으로 정리한 규격이다. 포털 작업 세션은 이 문서를 계약서로 삼아 구현하면
 > 된다. (러너 쪽은 구현·검증 완료. 데이터는 교사 PC를 떠나지 않으므로 "결과 전송"이

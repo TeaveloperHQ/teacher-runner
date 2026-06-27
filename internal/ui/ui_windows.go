@@ -8,10 +8,10 @@ import (
 	"context"
 	"log"
 
-	"github.com/TeaveloperHQ/teacher-runner/internal/autostart"
-	"github.com/TeaveloperHQ/teacher-runner/internal/config"
-	"github.com/TeaveloperHQ/teacher-runner/internal/server"
-	"github.com/TeaveloperHQ/teacher-runner/internal/tunnel"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/autostart"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/config"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/server"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/tunnel"
 	"github.com/atotto/clipboard"
 	"github.com/getlantern/systray"
 )

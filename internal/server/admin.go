@@ -8,7 +8,7 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/TeaveloperHQ/teacher-runner/internal/store"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/store"
 )
 
 //go:embed admin.html

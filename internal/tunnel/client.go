@@ -12,7 +12,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/TeaveloperHQ/teacher-runner/internal/config"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/config"
 	"github.com/gorilla/websocket"
 )
 

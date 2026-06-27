@@ -1,4 +1,4 @@
-module github.com/TeaveloperHQ/teacher-runner
+module github.com/TeaveloperHQ/teaveloper-runner
 
 go 1.26.4
 

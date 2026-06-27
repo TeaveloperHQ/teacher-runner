@@ -14,10 +14,10 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/TeaveloperHQ/teacher-runner/internal/appdef"
-	"github.com/TeaveloperHQ/teacher-runner/internal/config"
-	"github.com/TeaveloperHQ/teacher-runner/internal/store"
-	"github.com/TeaveloperHQ/teacher-runner/internal/tunnel"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/appdef"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/config"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/store"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/tunnel"
 )
 
 // 어뷰즈 방지 상한.

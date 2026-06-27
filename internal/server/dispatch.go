@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"strings"
 
-	"github.com/TeaveloperHQ/teacher-runner/internal/tunnel"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/tunnel"
 )
 
 // TunnelHandler 는 게이트웨이가 보낸 req 프레임을 러너의 mux 로 in-process 처리한다.

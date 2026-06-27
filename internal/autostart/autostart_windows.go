@@ -8,7 +8,9 @@ import (
 	"syscall"
 )
 
-const taskName = "TeaveloperAgent"
+// 인스톨러(installer.nsi)와 동일한 작업 이름을 써야 트레이 토글과 설치 옵션이
+// 같은 자동시작을 가리킨다.
+const taskName = "TeaveloperRunner"
 
 // hideWindow 는 schtasks 호출 시 콘솔 창이 깜빡이지 않게 한다.
 func hideWindow(cmd *exec.Cmd) {

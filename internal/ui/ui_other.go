@@ -11,9 +11,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/TeaveloperHQ/teacher-runner/internal/config"
-	"github.com/TeaveloperHQ/teacher-runner/internal/server"
-	"github.com/TeaveloperHQ/teacher-runner/internal/tunnel"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/config"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/server"
+	"github.com/TeaveloperHQ/teaveloper-runner/internal/tunnel"
 )
 
 // Run 은 콘솔 모드로 터널 클라이언트를 구동한다.
