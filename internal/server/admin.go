@@ -59,9 +59,11 @@ func (s *Server) adminCollections(w http.ResponseWriter, r *http.Request) {
 		sort.Strings(names)
 		for _, name := range names {
 			n, _ := s.store.Count(name)
+			perm := def.Collections[name]
 			out = append(out, map[string]any{
 				"name":   name,
-				"preset": string(def.Collections[name]),
+				"preset": perm.Label(),
+				"perm":   map[string]bool{"read": perm.Read, "write": perm.Write, "edit": perm.Edit},
 				"count":  n,
 			})
 		}

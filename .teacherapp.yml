@@ -1,0 +1,3 @@
+# 포털(teaveloper.com) 빌드 설정. 러너는 트레이 앱이라 GUI(콘솔 없음)로 빌드.
+stack: go
+windowsGui: true
