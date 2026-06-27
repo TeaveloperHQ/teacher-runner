@@ -20,8 +20,9 @@
   않으므로 안전합니다("터미널 0").
 - 한 개의 exe 안에 **정적 서빙 + 데이터 API + 관리 페이지 + 터널**이 모두 들어 있습니다.
 
-> **두 가지 방식**: ① 무설치 — exe 하나 더블클릭, 또는 ② 설치 프로그램으로 설치
-> (설치 시 **"Windows 시작 시 항상 실행"** 옵션 제공).
+> **상시 실행**: exe 하나만 더블클릭하면 트레이에 뜹니다. 트레이 우클릭 →
+> **"Windows 시작 시 자동 실행"** 으로 로그온할 때마다 자동으로 켜집니다
+> (관리자 권한 불필요). 배포·설치는 teaveloper 포털에서 제공합니다.
 
 ---
 
@@ -160,17 +161,9 @@ GOOS=windows GOARCH=amd64 CGO_ENABLED=0 \
 > systray 의 Windows 백엔드와 `modernc.org/sqlite` 모두 **순수 Go** → C 컴파일러
 > 없이 빌드됩니다. 포털 빌드 파이프라인(리눅스)에서 그대로 떨어집니다. exe ~11MB.
 
-### 설치 프로그램 빌드 (선택, NSIS)
-무설치 exe 외에 **설치형**도 제공한다(설치 시 "Windows 시작 시 항상 실행" 옵션 포함).
-리눅스에서 `makensis`로 컴파일된다.
-```bash
-sudo apt-get install -y nsis        # 빌더에 NSIS 설치(1회)
-./build-installer.sh                # → dist/teaveloper-runner-setup.exe
-```
-- per-user 설치(관리자 권한 불필요), 시작 메뉴·바탕화면 바로가기, 제거 프로그램 포함.
-- "항상 실행" 옵션은 트레이 토글과 **동일한 작업(`TeaveloperRunner`, schtasks 로그온
-  트리거)** 을 등록 → 설치/트레이 어느 쪽에서 켜고 꺼도 일관됨.
-- 설치본은 자동 게시하지 않는다(배포는 포털). 스크립트: [installer/installer.nsi](installer/installer.nsi).
+> 배포·설치(설치 프로그램 포함)는 **teaveloper 포털**이 담당합니다. 이 레포는
+> 소스만 제공하며, "상시 실행"은 트레이의 **"Windows 시작 시 자동 실행"**
+> 토글(schtasks `TeaveloperRunner` 로그온 트리거, 관리자 불필요)로 구현돼 있습니다.
 
 ### 로컬 테스트 (리눅스/macOS, 콘솔 모드)
 참조 게이트웨이(`github.com/aramorugeta/teacher-app-portal` 의 `gateway/`)를 띄우고,

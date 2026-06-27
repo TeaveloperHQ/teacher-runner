@@ -8,8 +8,8 @@ import (
 	"syscall"
 )
 
-// 인스톨러(installer.nsi)와 동일한 작업 이름을 써야 트레이 토글과 설치 옵션이
-// 같은 자동시작을 가리킨다.
+// 포털 설치 옵션도 같은 작업 이름을 쓰면 트레이 토글과 설치 옵션이 같은
+// 자동시작을 가리킨다(켜고 끄기 일관).
 const taskName = "TeaveloperRunner"
 
 // hideWindow 는 schtasks 호출 시 콘솔 창이 깜빡이지 않게 한다.
