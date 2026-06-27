@@ -85,13 +85,16 @@ AI가 만들어 준 앱 파일을 `app` 폴더에 넣습니다. 폴더 구조는
 ## 🤖 데이터 API 계약 (AI가 앱을 만들 때 겨누는 규격)
 
 ### teaveloper.json — 데이터 선언 (앱과 함께 생성)
+컬렉션 값은 **프리셋 문자열**(간편) 또는 **`{read, write, edit}` 세부 권한 객체**
+(세밀) 둘 다 받습니다. 둘은 섞어 써도 됩니다.
 ```json
 {
   "name": "우리반 설문",
   "collections": {
-    "responses": "submissions",
-    "notice":    "public",
-    "settings":  "private"
+    "responses": "submissions",                         // 프리셋: 제출만
+    "board":     "public",                              // 프리셋: 외부 전부 가능
+    "settings":  "private",                             // 프리셋: 외부 차단
+    "notice":    { "read": true, "write": false, "edit": false }  // 세부: 읽기 전용 공지
   }
 }
 ```
@@ -107,16 +110,29 @@ DELETE /api/{컬렉션}/{id}   삭제
 ```
 모든 레코드에는 서버가 `id`, `createdAt`, `updatedAt`(밀리초)를 넣어 돌려줍니다.
 
-### 프리셋별 "외부 방문자" 허용 동사 (러너가 강제하는 가드레일)
-| 프리셋 | 외부가 할 수 있는 것 | 소유자(로컬 _admin) |
-|---|---|---|
-| **submissions** | `POST`(제출)만 | 전부(열람·내보내기·삭제) |
-| **public** | `GET POST PATCH DELETE` | 전부 |
-| **private** | 없음(전부 거부) | 전부 |
+### "외부 방문자" 허용 동사 (러너가 강제하는 가드레일)
+세부 권한 → HTTP 동사 매핑:
 
-- 프론트가 무엇을 호출하든 러너가 동사를 막습니다.
-- **submissions 의 결과 읽기는 공개 API에 없습니다.** 오직 로컬 `/_admin` 에서만 →
-  학생 답안이 공개 URL로 새지 않습니다.
+| 권한 | 허용 동사 |
+|---|---|
+| `read` | `GET`(목록·상세 조회) |
+| `write` | `POST`(새 기록 추가/제출) |
+| `edit` | `PATCH` · `DELETE`(기존 기록 수정·삭제) |
+
+프리셋은 이 권한들의 단축입니다:
+
+| 프리셋 | = 세부 권한 | 외부가 할 수 있는 것 | 소유자(로컬 _admin) |
+|---|---|---|---|
+| **submissions** | `write` | `POST`(제출)만 | 전부(열람·내보내기·삭제) |
+| **public** | `read+write+edit` | `GET POST PATCH DELETE` | 전부 |
+| **private** | (없음) | 없음(전부 거부) | 전부 |
+
+- 프론트가 무엇을 호출하든 러너가 동사를 막습니다. **소유자(로컬 `/_admin`)는 이 값과
+  무관하게 항상 전체 권한**입니다.
+- `{read:true, write:false, edit:false}` 같은 조합으로 **읽기 전용 공지** 등을 자유롭게
+  만들 수 있습니다.
+- **submissions(쓰기 전용)의 결과 읽기는 공개 API에 없습니다.** 오직 로컬 `/_admin`
+  에서만 → 학생 답안이 공개 URL로 새지 않습니다.
 
 ### 제한 (어뷰즈 방지)
 - 레코드 본문 ≤ 100KB, 컬렉션당 ≤ 50,000개, 공개 IP 레이트리밋(5 req/s, 버스트 20).
@@ -140,8 +156,8 @@ DELETE /api/{컬렉션}/{id}   삭제
 main.go                  config 로드 → store 열기 → server 생성 → loopback 리스너 → UI
 internal/config/         config.json 로드·검증, baseDir(app/·db 기준)
 internal/store/          SQLite(modernc, 무CGO) records CRUD
-internal/appdef/         teaveloper.json 파서 + 프리셋 권한 맵
-internal/server/         mux: 정적 + /api(프리셋 게이트) + /_admin, 공개/로컬 context
+internal/appdef/         teaveloper.json 파서 + 권한(read/write/edit, 프리셋 단축)
+internal/server/         mux: 정적 + /api(권한 게이트) + /_admin, 공개/로컬 context
   dispatch.go              터널 req → in-process ServeHTTP (공개 표식 주입)
   admin.go + admin.html    관리 페이지 + CSV/JSON 내보내기
   rate.go                  IP 레이트리밋

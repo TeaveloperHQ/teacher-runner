@@ -145,13 +145,15 @@ GOOS=windows GOARCH=amd64 CGO_ENABLED=0 \
   "name": "우리반 설문",
   "collections": {
     "responses": "submissions",
-    "notice":    "public",
-    "settings":  "private"
+    "board":     "public",
+    "settings":  "private",
+    "notice":    { "read": true, "write": false, "edit": false }
   }
 }
 ```
 - `collections`의 키 = 컬렉션 이름(영문/숫자/_ , 1–64자).
-- 값 = 프리셋(아래 3종 중 하나). **여기 선언된 컬렉션만** 러너가 허용(미선언 = 404).
+- 값 = **프리셋 문자열**(아래 3종 중 하나) **또는 `{read, write, edit}` 세부 권한 객체**.
+  둘 다 받으며 섞어 써도 된다(하위호환). **여기 선언된 컬렉션만** 러너가 허용(미선언 = 404).
 
 ### 5.2 데이터 API (러너 제공, 프론트가 fetch)
 ```
@@ -172,16 +174,22 @@ DELETE /api/{컬렉션}/{id}   삭제
 - C 방식이라도 **`teaveloper.json` 은 러너 쪽 `app/` 에 있어야** 프리셋이 강제된다
   (프론트가 외부에 있어도 마찬가지). 프리셋/권한은 CORS 와 무관하게 그대로 강제됨.
 
-### 5.3 프리셋별 "외부 방문자" 허용 동사 (러너가 강제하는 가드레일)
-| 프리셋 | 외부(공개 URL)에서 가능 | 소유자(로컬 _admin) |
-|---|---|---|
-| **submissions** | `POST`만 | 열람·내보내기·삭제 전부 |
-| **public** | `GET POST PATCH DELETE` | 전부 |
-| **private** | 없음(전부 거부) | 전부 |
+### 5.3 "외부 방문자" 허용 동사 (러너가 강제하는 가드레일)
+세부 권한 → HTTP 동사: `read`=`GET` / `write`=`POST` / `edit`=`PATCH`·`DELETE`.
+프리셋은 이 권한들의 단축이다:
 
+| 프리셋 | = 세부 권한 | 외부(공개 URL)에서 가능 | 소유자(로컬 _admin) |
+|---|---|---|---|
+| **submissions** | `write` | `POST`만 | 열람·내보내기·삭제 전부 |
+| **public** | `read+write+edit` | `GET POST PATCH DELETE` | 전부 |
+| **private** | (없음) | 없음(전부 거부) | 전부 |
+
+- **소유자(로컬 `/_admin`)는 이 값과 무관하게 항상 전체 권한.**
 - **설문·신청·제출함** → `submissions` (학생은 내기만, 답안 읽기는 교사만).
 - **협업 보드·방명록·공용 목록** → `public`.
 - **설정·비밀 메모** → `private`(외부 완전 차단, 교사 로컬 전용).
+- **읽기 전용 공지** 등 조합이 필요하면 `{read:true, write:false, edit:false}` 처럼 세부
+  권한으로 선언한다(프리셋에 없는 조합).
 - AI는 "결과를 화면에 보여주는 기능"을 submissions 컬렉션엔 만들면 안 된다(공개 GET이
   403이라 동작 안 함). 결과 열람은 교사용 `/_admin`의 몫임을 프롬프트에 명시.
 
